@@ -1353,11 +1353,13 @@ if(isset($_SESSION['Sid']))
 
 if(isset($_POST['Register'])) 
 {        
-  $fn=$_POST['Full_Name'];
-  $em=$_POST['Email'];
-  $pwd=$_POST['Password'];
-  echo $fn;
+  $fn=htmlspecialchars($_POST['Full_Name']);
+  $em=htmlspecialchars($_POST['Email']);
+  $pwd=htmlspecialchars($_POST['Password']);
+  
 
+  if(!empty($fn) && !empty($em) && !empty($pwd))
+  {
   $qry = "INSERT INTO `Customer`(`Full Name`, `Email`, `Password`) VALUES ('$fn','$em','$pwd');";
   $result=mysqli_query($connect, $qry);
 
@@ -1371,13 +1373,20 @@ if(isset($_POST['Register']))
     echo "fails";
   }
 
+  }// full nam shouldn't be 0 
+
+  else
+  {
+    echo "Give proper details";
+  }
+
 }//if register
 
 if (isset($_POST['Login'])) {
     // code...
 
-    $lem=$_POST['Email'];
-    $lpwd=$_POST['Password'];
+    $lem=htmlspecialchars($_POST['Email']);
+    $lpwd=htmlspecialchars($_POST['Password']);
 
     $qry2="SELECT * FROM `Customer`;";
     $result2=mysqli_query($connect, $qry2); // compile query with database info taken from 
@@ -1402,40 +1411,3 @@ if (isset($_POST['Login'])) {
 } // if login 
 
 ?>
-
-<!-- copy paste in p1.php -->
-<?php 
-// include 'connect.php'; 
-?>
-    <!-- php -->
-    <!-- get data -->
-    <?php
-    // if (isset($_POST['submit_button'])) {
-    //   // code...
-    //   $n=$_POST["Farmer_name"]; // post ke andr input ka name hona chahiye
-    //   $gt=$_POST["Goods_taken"];
-    //   $qn=$_POST["quantity"];
-    //   $tp=$_POST["total_price"];
-
-    //   echo $n;
-
-      
-
-    //   $qry =  "INSERT INTO `Bhoomi_agency`(`Farmer_name`, `Goods_taken`, `quantity`, `total_price`) VALUES ('$n','$gt','$qn','$tp')";
-
-
-
-    //   $result = mysqli_query($connect , $qry);
-
-      // if ($result) {
-      //   // code...
-      //   echo "register sucess".mysqli_error($connect);
-      // }
-
-      // else {
-      //   echo "failed";
-      // }
-
-      // } // IF 
-    
-    ?>
