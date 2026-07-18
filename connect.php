@@ -6,13 +6,5 @@ if(!$connect)
     die("Connection Failed");
 }
 
-// if ($connect) {
-	
-// 	echo "connected";
-// }
 
-// else
-// {
-// echo "not connected".mysqli_error($connect);
-// }
  ?>
